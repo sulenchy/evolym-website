@@ -1,0 +1,78 @@
+backend:
+  name: git-gateway
+  branch: main
+  identity_url: "https://identity.netlify.com"
+  gateway_url: "https://api.netlify.com"
+  auth_endpoint: "auth"
+
+# Publish mode enables editorial workflow for content moderation
+publish_mode: editorial_workflow
+
+# Media files will be stored in the repo under public/uploads
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+# Collections define the structure for the different content types
+collections:
+  - name: "products"
+    label: "Products"
+    folder: "content/products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Price", name: "price", widget: "number", value_type: "float" }
+      - { label: "Description", name: "description", widget: "markdown" }
+      - { label: "Featured Image", name: "image", widget: "image" }
+      - { label: "Category", name: "category", widget: "select", options: ["Electronics", "Clothing", "Accessories", "Home & Kitchen", "Beauty & Personal Care"] }
+      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Is New", name: "isNew", widget: "boolean", default: false }
+      - { label: "In Stock", name: "inStock", widget: "boolean", default: true }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Featured Image", name: "image", widget: "image" }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Category", name: "category", widget: "select", options: ["Fashion", "Technology", "Lifestyle", "Travel", "Food & Cooking"] }
+      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+
+  - name: "categories"
+    label: "Categories"
+    folder: "content/categories"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Featured Image", name: "image", widget: "image" }
+      - { label: "Display Order", name: "order", widget: "number", default: 0 }
+
+  - name: "settings"
+    label: "Settings"
+    files:
+      - file: "content/settings/general.yml"
+        label: "General Settings"
+        name: "general"
+        fields:
+          - { label: "Site Title", name: "title", widget: "string" }
+          - { label: "Site Description", name: "description", widget: "text" }
+          - { label: "Logo", name: "logo", widget: "image" }
+          - { label: "Favicon", name: "favicon", widget: "image" }
+          - { label: "Footer Text", name: "footerText", widget: "text" }
+          - { label: "Social Media", name: "socialMedia", widget: "object", fields: [
+              { label: "Facebook", name: "facebook", widget: "string", required: false },
+              { label: "Twitter", name: "twitter", widget: "string", required: false },
+              { label: "Instagram", name: "instagram", widget: "string", required: false },
+              { label: "LinkedIn", name: "linkedin", widget: "string", required: false }
+            ] }
