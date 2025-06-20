@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  branch: sulenchy/ecommerce-blog
   branch: main
   identity_url: "https://identity.netlify.com"
   gateway_url: "https://api.netlify.com"
