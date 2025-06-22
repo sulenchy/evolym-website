@@ -1,7 +1,7 @@
 backend:
   name: github
-  branch: sulenchy/ecommerce-blog
-  branch: main
+  repo: sulenchy/evolym-website
+  branch: master
   identity_url: "https://identity.netlify.com"
   gateway_url: "https://api.netlify.com"
   auth_endpoint: "auth"
@@ -19,6 +19,8 @@ collections:
     label: "Products"
     folder: "content/products"
     create: true
+    extension: "json"
+    format: "json-frontmatter"
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
@@ -36,6 +38,8 @@ collections:
     label: "Blog Posts"
     folder: "content/blog"
     create: true
+    extension: "json"
+    format: "json-frontmatter"
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
@@ -52,6 +56,8 @@ collections:
     label: "Categories"
     folder: "content/categories"
     create: true
+    extension: "json"
+    format: "json-frontmatter"
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
@@ -61,6 +67,8 @@ collections:
 
   - name: "settings"
     label: "Settings"
+    extension: "json"
+    format: "json-frontmatter"
     files:
       - file: "content/settings/general.yml"
         label: "General Settings"
