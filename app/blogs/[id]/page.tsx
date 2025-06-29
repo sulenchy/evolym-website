@@ -1,5 +1,5 @@
-import type { Metadata } from "next"
-import { notFound } from "next/navigation"
+// import type { Metadata } from "next"
+// import { notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import { Calendar, User, ArrowLeft } from "lucide-react"
@@ -10,6 +10,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { RelatedBlogPosts } from "@/components/related-blog-posts"
 import { BlogShareButtons } from "@/components/blog-share-buttons"
+import { use } from "react"
+// import { loadJsonContentBySlug } from "@/lib/loadJsonContent"
 
 // This would typically come from your CMS or database
 const blogPosts = [
@@ -158,43 +160,46 @@ async function getBlogPost(id: string) {
   return post
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
-  const { id } = await params
-  const post = await getBlogPost(id)
+// export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+//     const { id } = use(params);
+//     const post = loadJsonContentBySlug('_contents/blogs', id)
 
-  if (!post) {
-    return {
-      title: "Post Not Found",
-    }
-  }
 
-  return {
-    title: `${post.title} | ShopBlog`,
-    description: post.excerpt,
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      images: [post.image],
-      type: "article",
-      publishedTime: post.date,
-      authors: [post.author],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.excerpt,
-      images: [post.image],
-    },
-  }
-}
+//   if (!post) {
+//     return {
+//       title: "Post Not Found",
+//     }
+//   }
+
+//   return {
+//     title: `${post.title} | ShopBlog`,
+//     description: post.excerpt,
+//     openGraph: {
+//       title: post.title,
+//       description: post.excerpt,
+//       images: [post.image],
+//       type: "article",
+//       publishedTime: post.date,
+//       authors: [post.author],
+//     },
+//     twitter: {
+//       card: "summary_large_image",
+//       title: post.title,
+//       description: post.excerpt,
+//       images: [post.image],
+//     },
+//   }
+// }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
-  const post = await getBlogPost(id)
+  
+  const { id } = use(params);
+  console.log('====> ', {id})
+  //   const post = loadJsonContentBySlug('_contents/blogs', id)
 
-  if (!post) {
-    notFound()
-  }
+  // if (!post) {
+  //   notFound()
+  // }
 
   return (
     <main className="container py-12">
@@ -248,7 +253,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
 
           {/* Tags */}
           <div className="flex flex-wrap gap-2">
-            {post.tags.map((tag) => (
+            {post.tags.map((tag: string) => (
               <Badge key={tag} variant="outline">
                 #{tag}
               </Badge>

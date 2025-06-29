@@ -34,7 +34,7 @@ collections:
       - { label: "Featured", name: "featured", widget: "boolean", default: false }
       - { label: "Publish Date", name: "date", widget: "datetime" }
 
-  - name: "blog"
+  - name: "blogs"
     label: "Blog Posts"
     folder: "content/blog"
     create: true
