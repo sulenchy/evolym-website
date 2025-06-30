@@ -23,8 +23,8 @@ const routes = [
     label: "Categories",
   },
   {
-    href: "/blog",
-    label: "Blog",
+    href: "/blogs",
+    label: "Blogs",
   },
   {
     href: "/about",

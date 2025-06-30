@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Calendar, User, ArrowLeft } from "lucide-react"
-
+import { blogPost } from "@/lib/types"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
@@ -11,152 +11,11 @@ import { Separator } from "@/components/ui/separator"
 import { RelatedBlogPosts } from "@/components/related-blog-posts"
 import { BlogShareButtons } from "@/components/blog-share-buttons"
 import { use } from "react"
-// import { loadJsonContentBySlug } from "@/lib/loadJsonContent"
+import { loadJsonContentBySlug } from "@/lib/loadJsonContent"
 
-// This would typically come from your CMS or database
-const blogPosts = [
-  {
-    id: "1",
-    title: "Top 10 Summer Fashion Trends",
-    excerpt: "Discover the hottest fashion trends for this summer season.",
-    content: `
-# Top 10 Summer Fashion Trends
-
-Summer is here, and it's time to refresh your wardrobe with the latest fashion trends. This season brings a perfect blend of comfort, style, and sustainability that will keep you looking chic while staying cool.
-
-## 1. Oversized Blazers
-
-The oversized blazer trend continues to dominate this summer. Perfect for air-conditioned offices or evening outings, these structured pieces add instant sophistication to any outfit.
-
-## 2. Bright Colors and Bold Patterns
-
-Say goodbye to muted tones! This summer is all about vibrant colors and eye-catching patterns. Think electric blues, sunny yellows, and tropical prints that capture the essence of the season.
-
-## 3. Sustainable Fashion
-
-More than ever, consumers are choosing eco-friendly options. Brands are responding with sustainable materials, ethical production processes, and timeless designs that won't go out of style.
-
-## 4. Comfortable Footwear
-
-Comfort meets style with chunky sneakers, platform sandals, and supportive flats. Your feet will thank you while you stay on-trend.
-
-## 5. Flowing Maxi Dresses
-
-Perfect for beach vacations or summer parties, flowing maxi dresses offer comfort and elegance in one piece.
-
-## Conclusion
-
-These trends offer something for everyone, whether you prefer bold statements or subtle elegance. Remember, the best fashion trend is the one that makes you feel confident and comfortable.
-    `,
-    date: "2024-04-15",
-    image: "/placeholder.svg?height=400&width=800",
-    category: "Fashion",
-    author: "Jane Smith",
-    authorImage: "/placeholder.svg?height=100&width=100",
-    authorBio: "Fashion enthusiast and style blogger with over 5 years of experience in the industry.",
-    tags: ["fashion", "summer", "trends", "style"],
-    readTime: "5 min read",
-  },
-  {
-    id: "2",
-    title: "The Ultimate Guide to Home Office Setup",
-    excerpt: "Create the perfect home office with these essential products.",
-    content: `
-# The Ultimate Guide to Home Office Setup
-
-Working from home has become the new normal for many professionals. Creating an efficient and comfortable home office space is crucial for productivity and well-being.
-
-## Essential Equipment
-
-### 1. Ergonomic Chair
-Invest in a quality ergonomic chair that supports your posture during long work sessions.
-
-### 2. Adjustable Desk
-A height-adjustable desk allows you to alternate between sitting and standing throughout the day.
-
-### 3. Proper Lighting
-Good lighting reduces eye strain and improves focus. Consider a combination of natural light and task lighting.
-
-## Technology Setup
-
-### Monitor Configuration
-A dual-monitor setup can significantly boost productivity by providing more screen real estate.
-
-### Audio Equipment
-Quality headphones or speakers are essential for video calls and maintaining focus.
-
-## Creating the Right Environment
-
-### Minimize Distractions
-Choose a quiet area of your home and use noise-canceling headphones if needed.
-
-### Personal Touches
-Add plants, artwork, or personal items to make the space feel welcoming and inspiring.
-
-## Conclusion
-
-A well-designed home office is an investment in your productivity and job satisfaction. Take time to create a space that works for your specific needs and work style.
-    `,
-    date: "2024-04-10",
-    image: "/placeholder.svg?height=400&width=800",
-    category: "Lifestyle",
-    author: "John Doe",
-    authorImage: "/placeholder.svg?height=100&width=100",
-    authorBio: "Remote work consultant and productivity expert helping professionals optimize their home offices.",
-    tags: ["home office", "productivity", "remote work", "workspace"],
-    readTime: "7 min read",
-  },
-  {
-    id: "3",
-    title: "Best Tech Gadgets of 2024",
-    excerpt: "A comprehensive review of this year's most innovative tech products.",
-    content: `
-# Best Tech Gadgets of 2024
-
-2024 has been an exciting year for technology, with innovations that are changing how we work, play, and connect with others.
-
-## Smartphones
-
-### Latest iPhone Features
-The newest iPhone models bring advanced camera capabilities and improved battery life.
-
-### Android Innovations
-Android devices continue to push boundaries with foldable screens and enhanced AI features.
-
-## Wearable Technology
-
-### Smartwatches
-Health monitoring features have become more sophisticated, offering detailed insights into fitness and wellness.
-
-### Fitness Trackers
-Affordable options now include features previously found only in premium devices.
-
-## Home Technology
-
-### Smart Home Devices
-Voice assistants and smart home integration have become more seamless and intuitive.
-
-### Entertainment Systems
-4K and 8K displays with advanced HDR support provide cinema-quality experiences at home.
-
-## Conclusion
-
-The tech landscape in 2024 offers something for everyone, from productivity enthusiasts to entertainment lovers. Choose gadgets that align with your lifestyle and needs.
-    `,
-    date: "2024-04-05",
-    image: "/placeholder.svg?height=400&width=800",
-    category: "Technology",
-    author: "Alex Johnson",
-    authorImage: "/placeholder.svg?height=100&width=100",
-    authorBio: "Tech reviewer and gadget enthusiast with expertise in consumer electronics and emerging technologies.",
-    tags: ["technology", "gadgets", "reviews", "innovation"],
-    readTime: "6 min read",
-  },
-]
-
-async function getBlogPost(id: string) {
+async function getBlogPost(slug: string, posts: blogPost[]) {
   // In a real app, this would fetch from your CMS or database
-  const post = blogPosts.find((post) => post.id === id)
+  const post = posts.find((post) => post.slug === slug)
   return post
 }
 
@@ -193,13 +52,19 @@ async function getBlogPost(id: string) {
 
 export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   
-  const { id } = use(params);
-  console.log('====> ', {id})
-  //   const post = loadJsonContentBySlug('_contents/blogs', id)
+  const { id } = use(params)
+  const newsItem = loadJsonContentBySlug('_contents/news', id)
 
-  // if (!post) {
-  //   notFound()
-  // }
+  if (!newsItem) {
+    notFound()
+  }
+  const { slug: string } = use(params);
+  console.log('====> ', {slug})
+  const post = loadJsonContentBySlug('_contents/blogs', slug)
+
+  if (!post) {
+    notFound()
+  }
 
   return (
     <main className="container py-12">

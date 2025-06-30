@@ -1,9 +1,11 @@
 import { NextResponse } from 'next/server';
-import { loadJsonContent } from '../../lib/loadJsonContent';
+import { loadJsonContent } from '../../../lib/loadJsonContent';
 
 export async function GET() {
   try {
-    const items = loadJsonContent('_contents/products');
+    debugger;
+    const items = loadJsonContent('_contents/blogs');
+    console.log({items})
     return NextResponse.json(items);
   } catch (err) {
     console.error('Failed to load news:', err);
