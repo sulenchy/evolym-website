@@ -1,0 +1,13 @@
+{
+"excerpt": "Exerpt for test data 1",
+  "author": "Abi",
+  "featured": false,
+  "date": "2025-06-30T15:15:00.000Z",
+  "title": "Test data 1",
+  "tags": [
+    "Testdata"
+  ],
+  "content": "The content for the test data 1",
+  "image": "/uploads/2ac31718-0745-4ed9-a0da-fe9849d1056f.jpg",
+  "category": "Lifestyle"
+}
