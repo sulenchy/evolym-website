@@ -1,0 +1,14 @@
+{
+"price": 1200,
+  "featured": false,
+  "date": "2025-06-30T17:48:00.000Z",
+  "inStock": true,
+  "isNew": true,
+  "title": "Test 2",
+  "tags": [
+    "testdata"
+  ],
+  "image": "/uploads/2ac31718-0745-4ed9-a0da-fe9849d1056f.jpg",
+  "description": "test 2 product",
+  "category": "Electronics"
+}
