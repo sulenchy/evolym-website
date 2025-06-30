@@ -3,7 +3,6 @@
 // import { metaDataForBlogs } from "@/lib/utils"
 import { blogPost } from "@/lib/types"
 import { useEffect, useState } from "react"
-
 import { BlogPostGrid } from "@/components/blog-post-grid"
 import { BlogSidebar } from "@/components/blog-sidebar"
 
@@ -20,7 +19,6 @@ export default function BlogPage() {
       .then((res) => res.json())
       .then((data) => {
         setPostBlogs(data);
-        console.log('===> ', {data})
         setLoading(false);
       });
   }, []);

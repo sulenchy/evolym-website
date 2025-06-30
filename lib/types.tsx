@@ -8,3 +8,12 @@ export type blogPost = {
     category: string;
     author: string;
   }
+
+  export type productType = {
+    slug: string;
+    name: string;
+    price: number;
+    image: string;
+    category: string;
+    isNew: boolean;
+  }

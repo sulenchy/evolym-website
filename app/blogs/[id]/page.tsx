@@ -13,11 +13,11 @@ import { BlogShareButtons } from "@/components/blog-share-buttons"
 import { use } from "react"
 import { loadJsonContentBySlug } from "@/lib/loadJsonContent"
 
-async function getBlogPost(slug: string, posts: blogPost[]) {
-  // In a real app, this would fetch from your CMS or database
-  const post = posts.find((post) => post.slug === slug)
-  return post
-}
+// async function getBlogPost(slug: string, posts: blogPost[]) {
+//   // In a real app, this would fetch from your CMS or database
+//   const post = posts.find((post) => post.slug === slug)
+//   return post
+// }
 
 // export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
 //     const { id } = use(params);
@@ -50,20 +50,13 @@ async function getBlogPost(slug: string, posts: blogPost[]) {
 //   }
 // }
 
-export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
-  
-  const { id } = use(params)
-  const newsItem = loadJsonContentBySlug('_contents/news', id)
-
-  if (!newsItem) {
-    notFound()
-  }
-  const { slug: string } = use(params);
-  console.log('====> ', {slug})
-  const post = loadJsonContentBySlug('_contents/blogs', slug)
+export default async function BlogPostPage({ params }: { params: { id: string } }) {
+  const { id } = params;
+  const post = loadJsonContentBySlug('_contents/blogs', id)
+  console.log('====> ', {post})
 
   if (!post) {
-    notFound()
+    // notFound()
   }
 
   return (
@@ -130,7 +123,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
           {/* Share Buttons */}
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-semibold">Share this article</h3>
-            <BlogShareButtons title={post.title} url={`/blog/${post.id}`} />
+            <BlogShareButtons title={post.title} url={`/blog/${id}`} />
           </div>
 
           <Separator />
@@ -152,10 +145,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
         </article>
 
         {/* Related Posts */}
-        <section className="mt-16">
+        {/* <section className="mt-16">
           <h2 className="mb-8 text-2xl font-bold">Related Articles</h2>
           <RelatedBlogPosts currentPostId={post.id} category={post.category} />
-        </section>
+        </section> */}
       </div>
     </main>
   )
