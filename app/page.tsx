@@ -9,9 +9,9 @@ import { LatestBlogPosts } from "@/components/latest-blog-posts"
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
-      <HeroSection />
+      {/* <HeroSection /> */}
 
-      <section className="container py-12 space-y-6">
+      {/* <section className="container py-12 space-y-6">
         <div className="flex flex-col items-center text-center space-y-4">
           <h2 className="text-3xl font-bold tracking-tight">Featured Products</h2>
           <p className="text-muted-foreground max-w-[700px]">Discover our handpicked selection of premium products</p>
@@ -25,7 +25,7 @@ export default function Home() {
             </Link>
           </Button>
         </div>
-      </section>
+      </section> */}
 
       <section className="bg-slate-50 py-12">
         <div className="container space-y-6">
@@ -38,7 +38,7 @@ export default function Home() {
           <LatestBlogPosts />
           <div className="flex justify-center pt-6">
             <Button asChild variant="outline" size="lg">
-              <Link href="/blog" className="flex items-center gap-2">
+              <Link href="/blogs" className="flex items-center gap-2">
                 <BookOpen className="h-5 w-5" />
                 Visit our Blog
               </Link>

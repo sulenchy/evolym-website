@@ -7,7 +7,7 @@ export function Footer() {
       <div className="container py-8 md:py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">ShopBlog</h3>
+            <h3 className="text-lg font-semibold">Evolym</h3>
             <p className="text-sm text-muted-foreground">
               Modern e-commerce platform with integrated blog and content management.
             </p>
@@ -26,7 +26,7 @@ export function Footer() {
               </Link>
             </div>
           </div>
-          <div className="space-y-4">
+          {/* <div className="space-y-4">
             <h3 className="text-lg font-semibold">Shop</h3>
             <ul className="space-y-2 text-sm">
               <li>
@@ -50,25 +50,26 @@ export function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Blog</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/blog" className="text-muted-foreground hover:text-foreground">
+                <Link href="/blogs" className="text-muted-foreground hover:text-foreground">
                   All Posts
                 </Link>
               </li>
-              <li>
-                <Link href="/blog/categories" className="text-muted-foreground hover:text-foreground">
+              {/** TODO add the categories and authors and bring this back */}
+              {/* <li>
+                <Link href="/blogs/categories" className="text-muted-foreground hover:text-foreground">
                   Categories
                 </Link>
               </li>
               <li>
-                <Link href="/blog/authors" className="text-muted-foreground hover:text-foreground">
+                <Link href="/blogs/authors" className="text-muted-foreground hover:text-foreground">
                   Authors
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="space-y-4">
@@ -79,7 +80,7 @@ export function Footer() {
                   About Us
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/contact" className="text-muted-foreground hover:text-foreground">
                   Contact
                 </Link>
@@ -93,7 +94,7 @@ export function Footer() {
                 <Link href="/privacy" className="text-muted-foreground hover:text-foreground">
                   Privacy Policy
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

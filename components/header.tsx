@@ -14,14 +14,14 @@ const routes = [
     href: "/",
     label: "Home",
   },
-  {
-    href: "/products",
-    label: "Products",
-  },
-  {
-    href: "/categories",
-    label: "Categories",
-  },
+  // {
+  //   href: "/products",
+  //   label: "Products",
+  // },
+  // {
+  //   href: "/categories",
+  //   label: "Categories",
+  // },
   {
     href: "/blogs",
     label: "Blogs",
@@ -51,7 +51,7 @@ export function Header() {
               <div className="flex h-full flex-col justify-between">
                 <div className="px-2">
                   <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
-                    <span className="text-xl font-bold">ShopBlog</span>
+                    <span className="text-xl font-bold">Evolym</span>
                   </Link>
                   <nav className="mt-8 flex flex-col gap-4">
                     {routes.map((route) => (
@@ -73,7 +73,7 @@ export function Header() {
             </SheetContent>
           </Sheet>
           <Link href="/" className="flex items-center">
-            <span className="text-xl font-bold hidden sm:inline-block">ShopBlog</span>
+            <span className="text-xl font-bold hidden sm:inline-block">Evolym</span>
             <span className="text-xl font-bold sm:hidden">SB</span>
           </Link>
           <nav className="ml-10 hidden lg:flex gap-6">
@@ -91,14 +91,15 @@ export function Header() {
             ))}
           </nav>
         </div>
-        <div className="flex items-center gap-2">
+        {/** TODO: remove the comment and implement the cart icon */}
+        {/* <div className="flex items-center gap-2">
           <Button variant="outline" size="icon" asChild>
             <Link href="/cart">
               <ShoppingCart className="h-5 w-5" />
               <span className="sr-only">Cart</span>
             </Link>
           </Button>
-        </div>
+        </div> */}
       </div>
     </header>
   )

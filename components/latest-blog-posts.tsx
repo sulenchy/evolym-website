@@ -1,46 +1,31 @@
+'use client'
+
 import Link from "next/link"
 import Image from "next/image"
 import { Calendar } from "lucide-react"
-
+import {useState, useEffect} from "react"
+import { blogPost } from "@/lib/types"
+import { getLatestPosts } from "@/lib/utils"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
-// This would typically come from your CMS or database
-const latestPosts = [
-  {
-    id: 1,
-    title: "Top 10 Summer Fashion Trends",
-    excerpt: "Discover the hottest fashion trends for this summer season.",
-    date: "2024-04-15",
-    image: "/placeholder.svg?height=200&width=400",
-    category: "Fashion",
-    author: "Jane Smith",
-  },
-  {
-    id: 2,
-    title: "The Ultimate Guide to Home Office Setup",
-    excerpt: "Create the perfect home office with these essential products.",
-    date: "2024-04-10",
-    image: "/placeholder.svg?height=200&width=400",
-    category: "Lifestyle",
-    author: "John Doe",
-  },
-  {
-    id: 3,
-    title: "Best Tech Gadgets of 2024",
-    excerpt: "A comprehensive review of this year's most innovative tech products.",
-    date: "2024-04-05",
-    image: "/placeholder.svg?height=200&width=400",
-    category: "Technology",
-    author: "Alex Johnson",
-  },
-]
-
 export function LatestBlogPosts() {
+  const [latestPosts, setlatestPosts] = useState<blogPost[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('/api/blogs')
+      .then((res) => res.json())
+      .then((data) => {
+        const latestThreePosts = getLatestPosts(data)
+        setlatestPosts(latestThreePosts);
+        setLoading(false);
+      });
+  }, []);
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
       {latestPosts.map((post) => (
-        <Link key={post.id} href={`/blog/${post.id}`} className="group">
+        <Link key={post.slug} href={`/blogs/${post.slug}`} className="group">
           <Card className="h-full overflow-hidden transition-all hover:shadow-md">
             <div className="relative aspect-[16/9]">
               <Image

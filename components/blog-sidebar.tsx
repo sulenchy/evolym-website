@@ -1,38 +1,55 @@
 import Link from "next/link"
 import { Search } from "lucide-react"
-
+import { blogPost } from "@/lib/types"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { useEffect, useState } from "react"
+import { getLatestPosts } from "@/lib/utils"
+// import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 // This would typically come from your CMS or database
-const categories = [
-  { id: "fashion", name: "Fashion", count: 12 },
-  { id: "technology", name: "Technology", count: 8 },
-  { id: "lifestyle", name: "Lifestyle", count: 15 },
-  { id: "travel", name: "Travel", count: 6 },
-  { id: "food", name: "Food & Cooking", count: 9 },
-]
+// const categories = [
+//   { id: "fashion", name: "Fashion", count: 12 },
+//   { id: "technology", name: "Technology", count: 8 },
+//   { id: "lifestyle", name: "Lifestyle", count: 15 },
+//   { id: "travel", name: "Travel", count: 6 },
+//   { id: "food", name: "Food & Cooking", count: 9 },
+// ]
 
-const recentPosts = [
-  {
-    id: 1,
-    title: "Top 10 Summer Fashion Trends",
-    date: "April 15, 2024",
-  },
-  {
-    id: 2,
-    title: "The Ultimate Guide to Home Office Setup",
-    date: "April 10, 2024",
-  },
-  {
-    id: 3,
-    title: "Best Tech Gadgets of 2024",
-    date: "April 5, 2024",
-  },
-]
+// const recentPosts = [
+//   {
+//     id: 1,
+//     title: "Top 10 Summer Fashion Trends",
+//     date: "April 15, 2024",
+//   },
+//   {
+//     id: 2,
+//     title: "The Ultimate Guide to Home Office Setup",
+//     date: "April 10, 2024",
+//   },
+//   {
+//     id: 3,
+//     title: "Best Tech Gadgets of 2024",
+//     date: "April 5, 2024",
+//   },
+// ]
 
-export function BlogSidebar() {
+export function BlogSidebar({blogPosts} : {blogPosts: blogPost[] }) {
+  //set state for recentPost and categoriesWithCount
+  // use the the useEffect to set them
+
+  const [latestPosts, setlatestPosts] = useState<blogPost[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('/api/blogs')
+      .then((res) => res.json())
+      .then((data) => {
+        const latestThreePosts = getLatestPosts(data)
+        setlatestPosts(latestThreePosts);
+        setLoading(false);
+      });
+  }, []);
   return (
     <div className="space-y-6">
       <Card>
@@ -46,8 +63,8 @@ export function BlogSidebar() {
           </div>
         </CardContent>
       </Card>
-
-      <Card>
+      {/** TODO: add the categories route and add this back */}
+      {/* <Card>
         <CardHeader>
           <CardTitle>Categories</CardTitle>
         </CardHeader>
@@ -63,7 +80,7 @@ export function BlogSidebar() {
             ))}
           </ul>
         </CardContent>
-      </Card>
+      </Card> */}
 
       <Card>
         <CardHeader>
@@ -71,9 +88,9 @@ export function BlogSidebar() {
         </CardHeader>
         <CardContent>
           <ul className="space-y-4">
-            {recentPosts.map((post) => (
-              <li key={post.id}>
-                <Link href={`/blog/${post.id}`} className="block space-y-1 hover:underline">
+            {latestPosts.map((post) => (
+              <li key={post.slug}>
+                <Link href={`/blog/${post.slug}`} className="block space-y-1 hover:underline">
                   <span className="font-medium">{post.title}</span>
                   <span className="block text-xs text-muted-foreground">{post.date}</span>
                 </Link>
@@ -82,8 +99,8 @@ export function BlogSidebar() {
           </ul>
         </CardContent>
       </Card>
-
-      <Card>
+      {/**TODO: Integrate the newsletter and bring this back */}
+      {/* <Card>
         <CardHeader>
           <CardTitle>Newsletter</CardTitle>
         </CardHeader>
@@ -96,7 +113,7 @@ export function BlogSidebar() {
             <Button className="w-full">Subscribe</Button>
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
     </div>
   )
 }
