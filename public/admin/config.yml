@@ -1,8 +1,6 @@
 backend:
   name: github
   repo: sulenchy/evolym-website
-  branch: master
-
 
 # Publish mode enables editorial workflow for content moderation
 publish_mode: editorial_workflow
