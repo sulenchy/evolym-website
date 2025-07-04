@@ -2,9 +2,7 @@ backend:
   name: github
   repo: sulenchy/evolym-website
   branch: master
-  identity_url: "https://identity.netlify.com"
-  gateway_url: "https://api.netlify.com"
-  auth_endpoint: "auth"
+
 
 # Publish mode enables editorial workflow for content moderation
 publish_mode: editorial_workflow
