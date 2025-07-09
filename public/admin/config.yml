@@ -43,7 +43,7 @@ collections:
       - { label: "Author", name: "author", widget: "string" }
       - { label: "Featured Image", name: "image", widget: "image" }
       - { label: "Excerpt", name: "excerpt", widget: "text" }
-      - { label: "Category", name: "category", widget: "select", options: ["Fashion", "Technology", "Lifestyle", "Travel", "Food & Cooking"] }
+      - { label: "Category", name: "category", widget: "select", options: ["Sexual Education", "E-commerce", "Lifestyle"] }
       - { label: "Tags", name: "tags", widget: "list" }
       - { label: "Content", name: "content", widget: "markdown" }
       - { label: "Featured", name: "featured", widget: "boolean", default: false }
