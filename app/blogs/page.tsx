@@ -32,10 +32,17 @@ export default function BlogPage() {
         </div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-[1fr_300px]">
-          <BlogPostGrid blogPosts={blogPosts} />
-          <div className="hidden md:block">
-            <BlogSidebar />
-          </div>
+          {blogPosts.length && 
+          <>
+            <BlogPostGrid blogPosts={blogPosts} />
+            <div className="hidden md:block">
+              <BlogSidebar />
+            </div>
+          </>
+          }
+          {
+            !blogPosts.length && <h2>Sorry!!! There is no blog post for you at the moment. You can check back later.</h2>
+          }
         </div>
       </div>
     </main>
