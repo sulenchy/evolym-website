@@ -9,22 +9,24 @@ import { getLatestPosts } from "@/lib/utils"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
-export function LatestBlogPosts() {
+export function LatestBlogPosts({blogPosts}: { blogPosts: blogPost[]}) {
   const [latestPosts, setlatestPosts] = useState<blogPost[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/blogs')
-      .then((res) => res.json())
-      .then((data) => {
-        const latestThreePosts = getLatestPosts(data)
-        setlatestPosts(latestThreePosts);
-        setLoading(false);
-      });
+    if (blogPosts) {
+      const latestThreePosts = getLatestPosts(blogPosts)
+      setlatestPosts(latestThreePosts);
+    }
+    
   }, []);
+
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-      {latestPosts.map((post) => (
+      {
+        latestPosts &&
+        <>
+        {latestPosts.map((post) => (
         <Link key={post.slug} href={`/blogs/${post.slug}`} className="group">
           <Card className="h-full overflow-hidden transition-all hover:shadow-md">
             <div className="relative aspect-[16/9]">
@@ -56,6 +58,11 @@ export function LatestBlogPosts() {
           </Card>
         </Link>
       ))}
+      </>
+      }
+      {
+            !latestPosts.length && <h2>Sorry!!! There is no blog post for you at the moment. You can check back later.</h2>
+          }
     </div>
   )
 }

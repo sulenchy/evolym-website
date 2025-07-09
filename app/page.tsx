@@ -1,12 +1,19 @@
+'use client'
+
 import Link from "next/link"
 import { ShoppingBag, BookOpen } from "lucide-react"
-
+import { useFetch } from "@/hooks/useFetch"
 import { Button } from "@/components/ui/button"
+import { Skeleton } from "@/components/ui/skeleton"
 import { FeaturedProducts } from "@/components/featured-products"
 import { HeroSection } from "@/components/hero-section"
 import { LatestBlogPosts } from "@/components/latest-blog-posts"
+import { getLatestPosts } from "@/lib/utils"
+import { blogPost } from "@/lib/types"
 
 export default function Home() {
+  const { data : blogPosts, loading: isLoadingBlogPost } = useFetch<blogPost[]>('/api/blogs');
+
   return (
     <main className="flex min-h-screen flex-col">
       {/* <HeroSection /> */}
@@ -27,6 +34,11 @@ export default function Home() {
         </div>
       </section> */}
 
+      { isLoadingBlogPost ? 
+      <>
+        <Skeleton />
+      </>
+      :
       <section className="bg-slate-50 py-12">
         <div className="container space-y-6">
           <div className="flex flex-col items-center text-center space-y-4">
@@ -35,7 +47,7 @@ export default function Home() {
               Stay updated with our latest articles, tips, and product reviews
             </p>
           </div>
-          <LatestBlogPosts />
+          { blogPosts && <LatestBlogPosts blogPosts={blogPosts} /> }
           <div className="flex justify-center pt-6">
             <Button asChild variant="outline" size="lg">
               <Link href="/blogs" className="flex items-center gap-2">
@@ -45,7 +57,7 @@ export default function Home() {
             </Button>
           </div>
         </div>
-      </section>
+      </section>}
     </main>
   )
 }
