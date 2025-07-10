@@ -11,15 +11,9 @@ import { LatestBlogPosts } from "@/components/latest-blog-posts"
 import { getLatestPosts } from "@/lib/utils"
 import { blogPost } from "@/lib/types"
 
-export async function getStaticProps() {
-  const { data : blogPosts, loading: isLoadingBlogPost } = useFetch<blogPost[]>('/api/blogs');
-  // const { data : blogPosts, loading: isLoadingBlogPost } = await res.json()
- 
-  return { props: { blogPosts, isLoadingBlogPost } }
-}
+export default async function Home() {
+  const { data : blogPosts, loading: isLoadingBlogPost } = await useFetch<blogPost[]>('/api/blogs');
 
-export default function Home({ blogPosts }: { blogPosts: blogPost[]}) {
-  // const { data : blogPosts, loading: isLoadingBlogPost } = useFetch<blogPost[]>('/api/blogs');
   return (
     <main className="flex min-h-screen flex-col">
       {/* <HeroSection /> */}
