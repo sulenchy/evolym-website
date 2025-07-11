@@ -50,9 +50,15 @@ import { loadJsonContentBySlug } from "@/lib/loadJsonContent"
 //   }
 // }
 
-export default async function BlogPostPage({ params }: { params: { id: string } }) {
+type BlogPostPageProps = {
+  params: {
+    id: string;
+  };
+}
+
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { id } = params;
-  const post = loadJsonContentBySlug('_contents/blogs', id)
+  const post = await loadJsonContentBySlug('_contents/blogs', id)
   console.log('====> ', {post})
 
   if (!post) {
