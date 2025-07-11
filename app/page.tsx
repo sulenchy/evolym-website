@@ -1,14 +1,15 @@
 'use client'
 
 import Link from "next/link"
-import { ShoppingBag, BookOpen } from "lucide-react"
+// import { ShoppingBag, BookOpen } from "lucide-react"
+import { BookOpen } from "lucide-react"
 import { useFetch } from "@/hooks/useFetch"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
-import { FeaturedProducts } from "@/components/featured-products"
-import { HeroSection } from "@/components/hero-section"
+// import { FeaturedProducts } from "@/components/featured-products"
+// import { HeroSection } from "@/components/hero-section"
 import { LatestBlogPosts } from "@/components/latest-blog-posts"
-import { getLatestPosts } from "@/lib/utils"
+// import { getLatestPosts } from "@/lib/utils"
 import { blogPost } from "@/lib/types"
 
 export default async function Home() {

@@ -12,14 +12,14 @@ import { BlogSidebar } from "@/components/blog-sidebar"
 
 export default function BlogPage() {
   const [blogPosts, setPostBlogs] = useState<blogPost[]>([])
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
 
    useEffect(() => {
     fetch('/api/blogs')
       .then((res) => res.json())
       .then((data) => {
         setPostBlogs(data);
-        setLoading(false);
+        // setLoading(false);
       });
   }, []);
 
@@ -36,7 +36,7 @@ export default function BlogPage() {
           <>
             <BlogPostGrid blogPosts={blogPosts} />
             <div className="hidden md:block">
-              <BlogSidebar />
+              <BlogSidebar blogPosts={blogPosts}/>
             </div>
           </>
           }

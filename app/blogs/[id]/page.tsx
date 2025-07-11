@@ -3,14 +3,14 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Calendar, User, ArrowLeft } from "lucide-react"
-import { blogPost } from "@/lib/types"
+// import { blogPost } from "@/lib/types"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { RelatedBlogPosts } from "@/components/related-blog-posts"
+// import { RelatedBlogPosts } from "@/components/related-blog-posts"
 import { BlogShareButtons } from "@/components/blog-share-buttons"
-import { use } from "react"
+// import { use } from "react"
 import { loadJsonContentBySlug } from "@/lib/loadJsonContent"
 
 // async function getBlogPost(slug: string, posts: blogPost[]) {
