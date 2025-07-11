@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 // import { ShoppingBag, BookOpen } from "lucide-react"
+import { useEffect, useState } from "react"
 import { BookOpen } from "lucide-react"
 import { useFetch } from "@/hooks/useFetch"
 import { Button } from "@/components/ui/button"
@@ -12,8 +13,11 @@ import { LatestBlogPosts } from "@/components/latest-blog-posts"
 // import { getLatestPosts } from "@/lib/utils"
 import { blogPost } from "@/lib/types"
 
-export default async function Home() {
-  const { data : blogPosts, loading: isLoadingBlogPost } = await useFetch<blogPost[]>('/api/blogs');
+export default function Home() {
+  // const [blogPosts, setBlogPosts] = useState([]);
+  const [loading, isLoading] = useState(false);
+
+  const { data:  blogPosts } = useFetch<blogPost[]>('/api/blogs');
 
   return (
     <main className="flex min-h-screen flex-col">
@@ -35,7 +39,7 @@ export default async function Home() {
         </div>
       </section> */}
 
-      { isLoadingBlogPost ? 
+      { loading ? 
       <>
         <Skeleton />
       </>

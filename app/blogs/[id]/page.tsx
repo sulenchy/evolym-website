@@ -1,7 +1,9 @@
+
 // import type { Metadata } from "next"
 // import { notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
+import { useEffect, useState, use } from "react"
 import { Calendar, User, ArrowLeft } from "lucide-react"
 // import { blogPost } from "@/lib/types"
 import { Button } from "@/components/ui/button"
@@ -12,6 +14,7 @@ import { Separator } from "@/components/ui/separator"
 import { BlogShareButtons } from "@/components/blog-share-buttons"
 // import { use } from "react"
 import { loadJsonContentBySlug } from "@/lib/loadJsonContent"
+import { blogPost } from "@/lib/types"
 
 // async function getBlogPost(slug: string, posts: blogPost[]) {
 //   // In a real app, this would fetch from your CMS or database
@@ -56,13 +59,31 @@ type BlogPostPageProps = {
   };
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { id } = params;
-  const post = await loadJsonContentBySlug('_contents/blogs', id)
+export default function BlogPostPage({ params }: any) {
+  const { id }: {id: string} = use(params);
+  const post = loadJsonContentBySlug('_contents/blogs', id)
   console.log('====> ', {post})
+
+  // const [post, setPost] = useState<blogPost | null>(null);
+  // const [error, setError] = useState('');
+
+  // useEffect(() => {
+  //   fetch(`/api/blogs/${id}`)
+  //     .then((res) => {
+  //       if (!res.ok) throw new Error('Not found');
+  //       return res.json();
+  //     })
+  //   .then((data) => {
+  //     setPost(data)
+  //     debugger
+  //     console.log('data ===> ', data);
+  // })
+  //     .catch(() => setError('Post not found'));
+  // }, [id]);
 
   if (!post) {
     // notFound()
+    return <h1>Sorry!</h1>
   }
 
   return (
@@ -159,3 +180,4 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     </main>
   )
 }
+
