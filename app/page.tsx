@@ -11,13 +11,13 @@ import { Skeleton } from "@/components/ui/skeleton"
 // import { HeroSection } from "@/components/hero-section"
 import { LatestBlogPosts } from "@/components/latest-blog-posts"
 // import { getLatestPosts } from "@/lib/utils"
-import { blogPost } from "@/lib/types"
+import { BlogPost } from "@/lib/types"
 
 export default function Home() {
   // const [blogPosts, setBlogPosts] = useState([]);
   const [loading, isLoading] = useState(false);
 
-  const { data:  blogPosts } = useFetch<blogPost[]>('/api/blogs');
+  const { data:  blogPosts } = useFetch<BlogPost[]>('/api/blogs');
 
   return (
     <main className="flex min-h-screen flex-col">

@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import { ReduxProvider } from "@/components/providers/redux-provider"
 
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning>
+        <ReduxProvider>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <div className="relative flex min-h-screen flex-col">
             <Header />
@@ -29,6 +31,7 @@ export default function RootLayout({
             <Footer />
           </div>
         </ThemeProvider>
+        </ReduxProvider>
       </body>
     </html>
   )

@@ -1,13 +1,13 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Calendar } from "lucide-react"
-import { blogPost } from "@/lib/types"
+import { BlogPost } from "@/lib/types"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
 
 
-export function BlogPostGrid({ blogPosts }: {blogPosts: blogPost[] }) {
+export function BlogPostGrid({ blogPosts }: {blogPosts: BlogPost[] }) {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
       {blogPosts.map((post) => (

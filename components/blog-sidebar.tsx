@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Search } from "lucide-react"
-import { blogPost } from "@/lib/types"
+import { BlogPost } from "@/lib/types"
 import { Input } from "@/components/ui/input"
 import { useEffect, useState } from "react"
 import { getLatestPosts } from "@/lib/utils"
@@ -34,11 +34,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 //   },
 // ]
 
-export function BlogSidebar({blogPosts} : {blogPosts: blogPost[] }) {
+export function BlogSidebar({blogPosts} : {blogPosts: BlogPost[] }) {
   //set state for recentPost and categoriesWithCount
   // use the the useEffect to set them
 
-  const [latestPosts, setlatestPosts] = useState<blogPost[]>([])
+  const [latestPosts, setlatestPosts] = useState<BlogPost[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

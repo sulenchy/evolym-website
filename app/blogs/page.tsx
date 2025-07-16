@@ -1,7 +1,7 @@
 "use client"
 
 // import { metaDataForBlogs } from "@/lib/utils"
-import { blogPost } from "@/lib/types"
+import { BlogPost } from "@/lib/types"
 import { useEffect, useState } from "react"
 import { BlogPostGrid } from "@/components/blog-post-grid"
 import { BlogSidebar } from "@/components/blog-sidebar"
@@ -11,7 +11,7 @@ import { BlogSidebar } from "@/components/blog-sidebar"
 
 
 export default function BlogPage() {
-  const [blogPosts, setPostBlogs] = useState<blogPost[]>([])
+  const [blogPosts, setPostBlogs] = useState<BlogPost[]>([])
   // const [loading, setLoading] = useState(true)
 
    useEffect(() => {
