@@ -61,8 +61,7 @@ type BlogPostPageProps = {
 export default function BlogPostPage({ params }: any) {
   const { id }: {id: string} = use(params);
   const post = loadJsonContentBySlug('_contents/blogs', id)
-  console.log('====> ', {post})
-
+  console.log('Post data:', post);
   // const [post, setPost] = useState<BlogPost | null>(null);
   // const [error, setError] = useState('');
 
@@ -74,7 +73,7 @@ export default function BlogPostPage({ params }: any) {
   //     })
   //   .then((data) => {
   //     setPost(data)
-  //     debugger
+  //     
   //     console.log('data ===> ', data);
   // })
   //     .catch(() => setError('Post not found'));

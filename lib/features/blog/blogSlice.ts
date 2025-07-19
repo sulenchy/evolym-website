@@ -20,7 +20,7 @@ const initialState: BlogState = {
 };
 
 // Create an async thunk for fetching blog posts
-export const fetchBlogPosts = createAsyncThunk('blog/fetchBlogPosts', async () => {
+export const fetchBlogs = createAsyncThunk('blog/fetchBlogs', async () => {
   const response = await axios.get('/api/blogs');
   return response.data;
 });
@@ -29,17 +29,18 @@ export const fetchBlogPosts = createAsyncThunk('blog/fetchBlogPosts', async () =
 const blogSlice = createSlice({
   name: 'blog',
   initialState,
-  reducers: {},
+  reducers: {
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchBlogPosts.pending, (state) => {
+      .addCase(fetchBlogs.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchBlogPosts.fulfilled, (state, action: PayloadAction<BlogPost[]>) => {
+      .addCase(fetchBlogs.fulfilled, (state, action: PayloadAction<BlogPost[]>) => {
         state.status = 'succeeded';
         state.posts = action.payload;
       })
-      .addCase(fetchBlogPosts.rejected, (state, action) => {
+      .addCase(fetchBlogs.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message || 'Something went wrong';
       });

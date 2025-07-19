@@ -12,12 +12,23 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { LatestBlogPosts } from "@/components/latest-blog-posts"
 // import { getLatestPosts } from "@/lib/utils"
 import { BlogPost } from "@/lib/types"
+import { useDispatch, useSelector } from "react-redux"
+import {RootState, AppDispatch} from "@/lib/store"
+import fetchBlogs  from "@/lib/features/blog/blogSlice"
 
 export default function Home() {
   // const [blogPosts, setBlogPosts] = useState([]);
-  const [loading, isLoading] = useState(false);
+
+  const dispatch = useDispatch<AppDispatch>();
+  const { blogs, loading, error } = useSelector((state: RootState) => state.blog);
+  // const [loading, isLoading] = useState(false);
 
   const { data:  blogPosts } = useFetch<BlogPost[]>('/api/blogs');
+
+  useEffect(() => {
+    console.log('Fetching blogs...', blogs, blogPosts);
+    dispatch(fetchBlogs());
+  }, [dispatch]);
 
   return (
     <main className="flex min-h-screen flex-col">
