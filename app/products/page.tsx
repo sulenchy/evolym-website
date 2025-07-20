@@ -2,7 +2,7 @@
 
 // import type { Metadata } from "next"
 import  {  useState, useEffect } from 'react'
-import { productType } from "@/lib/types"
+import { ProductType } from "@/lib/types"
 import { ProductGrid } from "@/components/product-grid"
 import { ProductFilters } from "@/components/product-filters"
 
@@ -12,7 +12,7 @@ import { ProductFilters } from "@/components/product-filters"
 // }
 
 export default function ProductsPage() {
-  const [products, setProducts] = useState<productType[]>([])
+  const [products, setProducts] = useState<ProductType[]>([])
   const [loading, setLoading] = useState(true)
 
    useEffect(() => {
