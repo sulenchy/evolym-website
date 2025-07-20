@@ -10,21 +10,17 @@ import { Skeleton } from "@/components/ui/skeleton"
 // import { FeaturedProducts } from "@/components/featured-products"
 // import { HeroSection } from "@/components/hero-section"
 import { LatestBlogPosts } from "@/components/latest-blog-posts"
-// import { getLatestPosts } from "@/lib/utils"
 import { BlogPost } from "@/lib/types"
 import { useDispatch, useSelector } from "react-redux"
 import {RootState, AppDispatch} from "@/lib/store"
 import {
-  fetchBlogsStart,
-  fetchBlogsSuccess,
-  fetchBlogsFailure,
   fetchBlogs
 } from '@/lib/features/blog/blogSlice';
 
 export default function Home() {
 
   const dispatch = useDispatch<AppDispatch>();
-  const { posts, status, error } = useSelector((state: RootState) => state.blog);
+  const { posts, status } = useSelector((state: RootState) => state.blog);
 
 
   // const { data, error: fetchError } = useFetch<BlogPost[]>('/api/blogs');
