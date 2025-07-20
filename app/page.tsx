@@ -14,20 +14,25 @@ import { LatestBlogPosts } from "@/components/latest-blog-posts"
 import { BlogPost } from "@/lib/types"
 import { useDispatch, useSelector } from "react-redux"
 import {RootState, AppDispatch} from "@/lib/store"
-import fetchBlogs  from "@/lib/features/blog/blogSlice"
+import {
+  fetchBlogsStart,
+  fetchBlogsSuccess,
+  fetchBlogsFailure,
+  fetchBlogs
+} from '@/lib/features/blog/blogSlice';
 
 export default function Home() {
-  // const [blogPosts, setBlogPosts] = useState([]);
 
   const dispatch = useDispatch<AppDispatch>();
-  const { blogs, loading, error } = useSelector((state: RootState) => state.blog);
-  // const [loading, isLoading] = useState(false);
+  const { posts, status, error } = useSelector((state: RootState) => state.blog);
 
-  const { data:  blogPosts } = useFetch<BlogPost[]>('/api/blogs');
+
+  // const { data, error: fetchError } = useFetch<BlogPost[]>('/api/blogs');
 
   useEffect(() => {
-    console.log('Fetching blogs...', blogs, blogPosts);
-    dispatch(fetchBlogs());
+    if (status === 'idle') {
+          dispatch(fetchBlogs());
+        }
   }, [dispatch]);
 
   return (
@@ -50,9 +55,9 @@ export default function Home() {
         </div>
       </section> */}
 
-      { loading ? 
+      { status === 'loading' ? 
       <>
-        <Skeleton />
+        <Skeleton className="h-96 w-full" />
       </>
       :
       <section className="bg-slate-50 py-12">
@@ -63,7 +68,7 @@ export default function Home() {
               Stay updated with our latest articles, tips, and product reviews
             </p>
           </div>
-          { blogPosts && <LatestBlogPosts blogPosts={blogPosts} /> }
+          { posts && <LatestBlogPosts blogPosts={posts} /> }
           <div className="flex justify-center pt-6">
             <Button asChild variant="outline" size="lg">
               <Link href="/blogs" className="flex items-center gap-2">

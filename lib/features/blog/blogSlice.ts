@@ -30,21 +30,20 @@ const blogSlice = createSlice({
   name: 'blog',
   initialState,
   reducers: {
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchBlogs.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchBlogs.fulfilled, (state, action: PayloadAction<BlogPost[]>) => {
-        state.status = 'succeeded';
-        state.posts = action.payload;
-      })
-      .addCase(fetchBlogs.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message || 'Something went wrong';
-      });
+    fetchBlogsStart(state) {
+      state.status = 'loading';
+      state.error = null;
+    },
+    fetchBlogsSuccess(state, action: PayloadAction<BlogPost[]>) {
+      state.status = 'succeeded';
+      state.posts = action.payload;
+    },
+    fetchBlogsFailure(state, action: PayloadAction<string>) {
+      state.status = 'failed';
+      state.error = action.payload;
+    },
   },
 });
 
+export const { fetchBlogsStart, fetchBlogsSuccess, fetchBlogsFailure } = blogSlice.actions;
 export default blogSlice.reducer;
