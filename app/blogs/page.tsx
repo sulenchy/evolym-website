@@ -1,27 +1,15 @@
 "use client"
 
-// import { metaDataForBlogs } from "@/lib/utils"
-import { blogPost } from "@/lib/types"
-import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 import { BlogPostGrid } from "@/components/blog-post-grid"
 import { BlogSidebar } from "@/components/blog-sidebar"
-
-// metaDataForBlogs
-
-
+import { Skeleton } from "@/components/ui/skeleton"
+import { RootState } from "@/lib/store"
 
 export default function BlogPage() {
-  const [blogPosts, setPostBlogs] = useState<blogPost[]>([])
-  // const [loading, setLoading] = useState(true)
+  const { posts: blogPosts, status } = useSelector((state: RootState) => state.blog)
 
-   useEffect(() => {
-    fetch('/api/blogs')
-      .then((res) => res.json())
-      .then((data) => {
-        setPostBlogs(data);
-        // setLoading(false);
-      });
-  }, []);
+  
 
   return (
     <main className="container py-12">
@@ -32,17 +20,19 @@ export default function BlogPage() {
         </div>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-[1fr_300px]">
-          {blogPosts.length && 
-          <>
-            <BlogPostGrid blogPosts={blogPosts} />
-            <div className="hidden md:block">
-              <BlogSidebar blogPosts={blogPosts}/>
-            </div>
-          </>
-          }
-          {
-            !blogPosts.length && <h2>Sorry!!! There is no blog post for you at the moment. You can check back later.</h2>
-          }
+          {status === 'loading' && <Skeleton className="h-96 w-full" />}
+          {status === 'succeeded' && blogPosts.length > 0 && (
+            <>
+              <BlogPostGrid blogPosts={blogPosts} />
+              <div className="hidden md:block">
+                <BlogSidebar blogPosts={blogPosts}/>
+              </div>
+            </>
+          )}
+          {status === 'succeeded' && blogPosts.length === 0 && (
+            <h2>Sorry!!! There is no blog post for you at the moment. You can check back later.</h2>
+          )}
+          {status === 'failed' && <div>Error loading blog posts.</div>}
         </div>
       </div>
     </main>

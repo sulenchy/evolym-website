@@ -4,13 +4,13 @@ import Link from "next/link"
 import Image from "next/image"
 import { Calendar } from "lucide-react"
 import {useState, useEffect} from "react"
-import { blogPost } from "@/lib/types"
+import { BlogPost } from "@/lib/types"
 import { getLatestPosts } from "@/lib/utils"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
-export function LatestBlogPosts({blogPosts}: { blogPosts: blogPost[]}) {
-  const [latestPosts, setlatestPosts] = useState<blogPost[]>([])
+export function LatestBlogPosts({blogPosts}: { blogPosts: BlogPost[]}) {
+  const [latestPosts, setlatestPosts] = useState<BlogPost[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

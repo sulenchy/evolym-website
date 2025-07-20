@@ -1,4 +1,4 @@
-export type blogPost = {
+export type BlogPost = {
     slug: string;
     title: string;
     excerpt: string;
@@ -9,7 +9,7 @@ export type blogPost = {
     author: string;
   }
 
-  export type productType = {
+  export type ProductType = {
     slug: string;
     name: string;
     price: number;

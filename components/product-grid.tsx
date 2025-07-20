@@ -1,15 +1,15 @@
 import Link from "next/link"
 import Image from "next/image"
-import { productType } from "@/lib/types"
+import { ProductType } from "@/lib/types"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
 
 
-export function ProductGrid({ products }:{ products: productType[] }) {
+export function ProductGrid({ products }:{ products: ProductType[] }) {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {products.map((product: productType) => (
+      {products.map((product: ProductType) => (
         <Link key={product.slug} href={`/products/${product.slug}`} className="group">
           <Card className="overflow-hidden transition-all hover:shadow-md">
             <div className="relative aspect-square">
