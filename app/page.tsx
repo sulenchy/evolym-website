@@ -14,22 +14,27 @@ import { BlogPost } from "@/lib/types"
 import { useDispatch, useSelector } from "react-redux"
 import {RootState, AppDispatch} from "@/lib/store"
 import {
-  fetchBlogs
+  fetchBlogs,
+  fetchBlogsFailure,
+  fetchBlogsSuccess
 } from '@/lib/features/blog/blogSlice';
 
 export default function Home() {
 
   const dispatch = useDispatch<AppDispatch>();
-  // const { posts, status } = useSelector((state: RootState) => state.blog);
+  const { posts, status, error } = useSelector((state: RootState) => state.blog);
 
 
-  const { data: posts, error: fetchError } = useFetch<BlogPost[]>('/api/blogs');
+  const { data, error: fetchError } = useFetch<BlogPost[]>('/api/blogs');
 
-  // useEffect(() => {
-  //   if (status === 'idle') {
-  //         dispatch(fetchBlogs());
-  //       }
-  // }, [dispatch]);
+  useEffect(() => {
+  if (data) {
+    dispatch(fetchBlogsSuccess(data));
+  }
+  if (fetchError) {
+    dispatch(fetchBlogsFailure(fetchError));
+  }
+}, [data, error, dispatch]);
 
   return (
     <main className="flex min-h-screen flex-col">
@@ -51,11 +56,11 @@ export default function Home() {
         </div>
       </section> */}
 
-      {/* { status === 'loading' ? 
+      { status === 'loading' ? 
       <>
         <Skeleton className="h-96 w-full" />
       </>
-      : */}
+      :
       <section className="bg-slate-50 py-12">
         <div className="container space-y-6">
           <div className="flex flex-col items-center text-center space-y-4">
@@ -75,7 +80,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* // } */}
+      }
     </main>
   )
 }
