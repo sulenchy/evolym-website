@@ -1,44 +1,49 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { notFound } from "next/navigation"
-import { BlogShareButtons } from "@/components/blog-share-buttons"
-import { RelatedBlogPosts } from "@/components/related-blog-posts"
-import {Skeleton} from "@/components/ui/skeleton"
-import { fetchBlogs } from "@/lib/features/blog/blogSlice"
-import { AppDispatch, RootState } from "@/lib/store"
-import { BlogPost } from "@/lib/types"
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { notFound, useParams } from "next/navigation";
+import { BlogShareButtons } from "@/components/blog-share-buttons";
+import { RelatedBlogPosts } from "@/components/related-blog-posts";
+import { Skeleton } from "@/components/ui/skeleton";
+import { fetchBlogs } from "@/lib/features/blog/blogSlice";
+import { AppDispatch, RootState } from "@/lib/store";
+import { BlogPost } from "@/lib/types";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
-export default function BlogPostPage({ params }: { params: { id: string } }) {
-  const dispatch = useDispatch<AppDispatch>()
-  const { posts: allBlogPosts, status } = useSelector((state: RootState) => state.blog)
+export default function BlogPostPage() {
+  const { id } = useParams();
+  const dispatch = useDispatch<AppDispatch>();
+  const { posts: allBlogPosts, status } = useSelector(
+    (state: RootState) => state.blog
+  );
 
   useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchBlogs())
+    if (status === "idle") {
+      dispatch(fetchBlogs());
     }
-  }, [dispatch, status])
+  }, [dispatch, status]);
 
-  const blogPost = allBlogPosts.find((post: BlogPost) => post.slug === params.id)
-  
-  if (status === 'loading') {
-    return <Skeleton className="h-96 w-full" />
+  const blogPost = allBlogPosts.find((post: BlogPost) => post.slug === id);
+
+  if (status === "loading") {
+    return <Skeleton className="h-96 w-full" />;
   }
 
-  if (status === 'succeeded' && !blogPost) {
-    return notFound()
+  if (status === "succeeded" && !blogPost) {
+    return notFound();
   }
 
   if (!blogPost) {
     // This will be caught by the next line, but it's good practice to have it.
-    return notFound()
+    return notFound();
   }
-
 
   const relatedPosts = allBlogPosts.filter(
     (post) => post.category === blogPost.category && post.slug !== blogPost.slug
-  )
+  );
 
   return (
     <main className="container py-12">
@@ -47,7 +52,12 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
         <p className="text-muted-foreground">
           {new Date(blogPost.date).toLocaleDateString()}
         </p>
-        <div dangerouslySetInnerHTML={{ __html: blogPost.content }} />
+        {/* Render markdown content */}
+        <ReactMarkdown
+          children={blogPost.content}
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
+        />
       </article>
 
       <div className="mt-8 flex justify-center">
@@ -61,5 +71,5 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
         </div>
       )}
     </main>
-  )
+  );
 }
