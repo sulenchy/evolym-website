@@ -20,16 +20,16 @@ import {
 export default function Home() {
 
   const dispatch = useDispatch<AppDispatch>();
-  const { posts, status } = useSelector((state: RootState) => state.blog);
+  // const { posts, status } = useSelector((state: RootState) => state.blog);
 
 
-  // const { data, error: fetchError } = useFetch<BlogPost[]>('/api/blogs');
+  const { data: posts, error: fetchError } = useFetch<BlogPost[]>('/api/blogs');
 
-  useEffect(() => {
-    if (status === 'idle') {
-          dispatch(fetchBlogs());
-        }
-  }, [dispatch]);
+  // useEffect(() => {
+  //   if (status === 'idle') {
+  //         dispatch(fetchBlogs());
+  //       }
+  // }, [dispatch]);
 
   return (
     <main className="flex min-h-screen flex-col">
@@ -51,11 +51,11 @@ export default function Home() {
         </div>
       </section> */}
 
-      { status === 'loading' ? 
+      {/* { status === 'loading' ? 
       <>
         <Skeleton className="h-96 w-full" />
       </>
-      :
+      : */}
       <section className="bg-slate-50 py-12">
         <div className="container space-y-6">
           <div className="flex flex-col items-center text-center space-y-4">
@@ -74,7 +74,8 @@ export default function Home() {
             </Button>
           </div>
         </div>
-      </section>}
+      </section>
+      {/* // } */}
     </main>
   )
 }
