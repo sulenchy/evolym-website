@@ -74,7 +74,7 @@ export function Header() {
           </Sheet>
           <Link href="/" className="flex items-center">
             <span className="text-xl font-bold hidden sm:inline-block">Evolym</span>
-            <span className="text-xl font-bold sm:hidden">SB</span>
+            <span className="text-xl font-bold sm:hidden">Evolym</span>
           </Link>
           <nav className="ml-10 hidden lg:flex gap-6">
             {routes.map((route) => (
