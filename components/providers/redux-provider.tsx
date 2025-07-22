@@ -4,9 +4,7 @@ import type React from "react"
 import { useRef } from "react"
 import { persistStore } from 'redux-persist'
 import { Provider } from "react-redux"
-import { PersistGate } from "redux-persist/integration/react"
 import { makeStore, AppStore } from "@/lib/store"
-import { Skeleton } from "@/components/ui/skeleton"
 
 export function ReduxProvider({ children }: { children: React.ReactNode }) {
   const storeRef = useRef<AppStore | null>(undefined)

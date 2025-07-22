@@ -23,7 +23,6 @@ export function loadJsonContent(subPath: string) {
 }
 
 export function loadJsonContentBySlug(folder: string, slug: string) {
-    console.log({folder, slug})
     const filePath = path.join(process.cwd(), folder, `${slug}.json`);
     const content = fs.readFileSync(filePath, 'utf-8');
     return JSON.parse(content);

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 export function useFetch<T>(url: string) {
   const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<null | string>(null);
 
   useEffect(() => {
@@ -10,7 +9,6 @@ export function useFetch<T>(url: string) {
 
     const fetchData = async () => {
       try {
-        setLoading(true);
         const res = await fetch(url);
         if (!res.ok) throw new Error(`Error: ${res.statusText}`);
         const json = await res.json();
@@ -24,9 +22,7 @@ export function useFetch<T>(url: string) {
         } else {
           setError("An unknown error occurred");
         }
-      } finally {
-        if (isMounted) setLoading(false);
-      }
+      } 
     };
 
     fetchData();
@@ -35,6 +31,5 @@ export function useFetch<T>(url: string) {
       isMounted = false;
     };
   }, [url]);
-  console.log({data});
-  return { data, loading, error };
+  return { data, error };
 }

@@ -14,7 +14,6 @@ import { BlogPost } from "@/lib/types"
 import { useDispatch, useSelector } from "react-redux"
 import {RootState, AppDispatch} from "@/lib/store"
 import {
-  fetchBlogs,
   fetchBlogsFailure,
   fetchBlogsSuccess
 } from '@/lib/features/blog/blogSlice';
