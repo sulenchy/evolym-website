@@ -9,8 +9,6 @@ import { RootState } from "@/lib/store"
 export default function BlogPage() {
   const { posts: blogPosts, status } = useSelector((state: RootState) => state.blog)
 
-  
-
   return (
     <main className="container py-12">
       <div className="flex flex-col space-y-6">
@@ -25,7 +23,7 @@ export default function BlogPage() {
             <>
               <BlogPostGrid blogPosts={blogPosts} />
               <div className="hidden md:block">
-                <BlogSidebar blogPosts={blogPosts}/>
+                <BlogSidebar />
               </div>
             </>
           )}

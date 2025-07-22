@@ -1,68 +1,26 @@
 import Link from "next/link"
-import { Search } from "lucide-react"
 import { BlogPost } from "@/lib/types"
-import { Input } from "@/components/ui/input"
+import { Calendar } from "lucide-react";
 import { useEffect, useState } from "react"
 import { getLatestPosts } from "@/lib/utils"
+import { useSelector } from "react-redux"
+import { RootState } from "@/lib/store"
 // import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-// This would typically come from your CMS or database
-// const categories = [
-//   { id: "fashion", name: "Fashion", count: 12 },
-//   { id: "technology", name: "Technology", count: 8 },
-//   { id: "lifestyle", name: "Lifestyle", count: 15 },
-//   { id: "travel", name: "Travel", count: 6 },
-//   { id: "food", name: "Food & Cooking", count: 9 },
-// ]
-
-// const recentPosts = [
-//   {
-//     id: 1,
-//     title: "Top 10 Summer Fashion Trends",
-//     date: "April 15, 2024",
-//   },
-//   {
-//     id: 2,
-//     title: "The Ultimate Guide to Home Office Setup",
-//     date: "April 10, 2024",
-//   },
-//   {
-//     id: 3,
-//     title: "Best Tech Gadgets of 2024",
-//     date: "April 5, 2024",
-//   },
-// ]
-
-export function BlogSidebar({blogPosts} : {blogPosts: BlogPost[] }) {
-  //set state for recentPost and categoriesWithCount
-  // use the the useEffect to set them
-
+export function BlogSidebar() {
   const [latestPosts, setlatestPosts] = useState<BlogPost[]>([])
-  const [loading, setLoading] = useState(true)
+  const [searchTerm, setSearchTerm] = useState("")
+  const { posts: blogPosts, status } = useSelector((state: RootState) => state.blog)
 
   useEffect(() => {
-    fetch('/api/blogs')
-      .then((res) => res.json())
-      .then((data) => {
-        const latestThreePosts = getLatestPosts(data)
-        setlatestPosts(latestThreePosts);
-        setLoading(false);
-      });
+    const latestThreePosts = getLatestPosts(blogPosts)
+    setlatestPosts(latestThreePosts);
   }, []);
+
   return (
     <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>Search</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="relative">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input type="search" placeholder="Search posts..." className="pl-8" />
-          </div>
-        </CardContent>
-      </Card>
+
       {/** TODO: add the categories route and add this back */}
       {/* <Card>
         <CardHeader>
@@ -90,9 +48,19 @@ export function BlogSidebar({blogPosts} : {blogPosts: BlogPost[] }) {
           <ul className="space-y-4">
             {latestPosts.map((post) => (
               <li key={post.slug}>
-                <Link href={`/blog/${post.slug}`} className="block space-y-1 hover:underline">
+                <Link href={`/blogs/${post.slug}`} className="block space-y-1 hover:underline">
                   <span className="font-medium">{post.title}</span>
-                  <span className="block text-xs text-muted-foreground">{post.date}</span>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                  <Calendar className="h-4 w-4" />
+                  <time dateTime={post.date}>
+                    {new Date(post.date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
+                </div>
+                  
                 </Link>
               </li>
             ))}
