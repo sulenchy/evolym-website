@@ -17,3 +17,8 @@ export type BlogPost = {
     category: string;
     isNew: boolean;
   }
+
+ export type AboutType = {
+    title: string;
+    description: string;
+}

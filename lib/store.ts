@@ -1,6 +1,7 @@
 // store.ts
 import { configureStore } from '@reduxjs/toolkit';
 import blogReducer from './features/blog/blogSlice';
+import aboutReducer from './features/about/aboutSlice';
 import { persistReducer, persistStore, 
   FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER 
 } from 'redux-persist';
@@ -10,6 +11,7 @@ import { combineReducers } from 'redux';
 // Combine all reducers
 const rootReducer = combineReducers({
   blog: blogReducer,
+  about: aboutReducer, // Assuming you have an aboutReducer
 });
 
 // Define persist config
