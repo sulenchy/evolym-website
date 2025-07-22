@@ -11,11 +11,8 @@ export const metadata: Metadata = {
 };
 
 async function fetchAboutData() {
-    const res = await loadJsonContent("/_content/about");
-    if (!res.ok) throw new Error("Failed to fetch About Us data");
-    const data = await res.json();
-    // Adjust this according to your Decap CMS structure
-    return data.entry || data;
+    const res = await loadJsonContent("/_contents/about");
+    console.log({res})
 }
 
 export default async function AboutPage() {
@@ -23,11 +20,12 @@ export default async function AboutPage() {
 
     return (
         <main className="max-w-3xl mx-auto py-12 px-4">
-            <h1 className="text-4xl font-bold mb-6">{aboutData.title || "About Us"}</h1>
-            <div className="prose prose-lg">
+            {/* <h1 className="text-4xl font-bold mb-6">{aboutData.title || "About Us"}</h1>
+            <div className="prose prose-lg"> */}
                 {/* If content is markdown, use a markdown renderer like react-markdown */}
-                <p>{aboutData.body || aboutData.content || "No content available."}</p>
-            </div>
+                {/* <p>{aboutData.body || aboutData.content || "No content available."}</p> */}
+            {/* </div> */}
+            <h1>Welcome to about page</h1>
         </main>
     );
 }

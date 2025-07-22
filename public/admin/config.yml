@@ -86,7 +86,7 @@ collections:
     extension: "json"
     format: "json-frontmatter"
     files:
-      - file: "_contents/about/general.yml"
+      - file: "_contents/about/general.json"
         label: "General Settings"
         name: "general"
         fields:
