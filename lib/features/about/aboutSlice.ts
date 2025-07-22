@@ -35,7 +35,7 @@ const aboutSlice = createSlice({
       state.status = 'loading';
       state.error = null;
     },
-    fetchAboutSuccess(state, action: PayloadAction<BlogPost[]>) {
+    fetchAboutSuccess(state, action: PayloadAction<AboutType[]>) {
       state.status = 'succeeded';
       state.about = action.payload;
     },
