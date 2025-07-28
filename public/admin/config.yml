@@ -9,22 +9,37 @@ publish_mode: editorial_workflow
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
+i18n:
+  # Required and can be one of multiple_folders, multiple_files or single_file
+  # multiple_folders - persists files in `<folder>/<locale>/<slug>.<extension>`
+  # multiple_files - persists files in `<folder>/<slug>.<locale>.<extension>`
+  # single_file - persists a single file in `<folder>/<slug>.<extension>`
+  structure: multiple_folders
+
+  # Required - a list of locales to show in the editor UI
+  locales: [en, de, fr]
+
+  # Optional, defaults to the first item in locales.
+  # The locale to be used for fields validation and as a baseline for the entry.
+  default_locale: en
+
 # Collections define the structure for the different content types
 collections:
   - name: "products"
     label: "Products"
     folder: "_contents/products"
+    i18n: true
     create: true
     extension: "json"
     format: "json-frontmatter"
     slug: "{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Title", name: "title", widget: "string", i18n: true }
       - { label: "Price", name: "price", widget: "number", value_type: "float" }
-      - { label: "Description", name: "description", widget: "markdown" }
+      - { label: "Description", name: "description", widget: "markdown", i18n: true }
       - { label: "Featured Image", name: "image", widget: "image" }
-      - { label: "Category", name: "category", widget: "select", options: ["Electronics", "Clothing", "Accessories", "Home & Kitchen", "Beauty & Personal Care"] }
-      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Category", name: "category", widget: "select", options: ["Electronics", "Clothing", "Accessories", "Home & Kitchen", "Beauty & Personal Care"], i18n: true }
+      - { label: "Tags", name: "tags", widget: "list", i18n: true }
       - { label: "Is New", name: "isNew", widget: "boolean", default: false }
       - { label: "In Stock", name: "inStock", widget: "boolean", default: true }
       - { label: "Featured", name: "featured", widget: "boolean", default: false }
