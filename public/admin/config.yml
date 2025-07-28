@@ -14,81 +14,21 @@ collections:
   - name: "products"
     label: "Products"
     folder: "_contents/products"
+    i18n: true
+    locales: [en, fr, es]
+    default_locale: en
     create: true
     extension: "json"
     format: "json-frontmatter"
     slug: "{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Title", name: "title", widget: "string", i18n: true }
       - { label: "Price", name: "price", widget: "number", value_type: "float" }
-      - { label: "Description", name: "description", widget: "markdown" }
+      - { label: "Description", name: "description", widget: "markdown", i18n: true }
       - { label: "Featured Image", name: "image", widget: "image" }
-      - { label: "Category", name: "category", widget: "select", options: ["Electronics", "Clothing", "Accessories", "Home & Kitchen", "Beauty & Personal Care"] }
-      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Category", name: "category", widget: "select", options: ["Electronics", "Clothing", "Accessories", "Home & Kitchen", "Beauty & Personal Care"], i18n: true }
+      - { label: "Tags", name: "tags", widget: "list", i18n: true }
       - { label: "Is New", name: "isNew", widget: "boolean", default: false }
       - { label: "In Stock", name: "inStock", widget: "boolean", default: true }
       - { label: "Featured", name: "featured", widget: "boolean", default: false }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-
-  - name: "blogs"
-    label: "Blog Posts"
-    folder: "_contents/blogs"
-    create: true
-    extension: "json"
-    format: "json-frontmatter"
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Author", name: "author", widget: "string" }
-      - { label: "Featured Image", name: "image", widget: "image" }
-      - { label: "Excerpt", name: "excerpt", widget: "text" }
-      - { label: "Category", name: "category", widget: "select", options: ["Sexual Education", "E-commerce", "Lifestyle"] }
-      - { label: "Tags", name: "tags", widget: "list" }
-      - { label: "Content", name: "content", widget: "markdown" }
-      - { label: "Featured", name: "featured", widget: "boolean", default: false }
-
-  - name: "categories"
-    label: "Categories"
-    folder: "_contents/categories"
-    create: true
-    extension: "json"
-    format: "json-frontmatter"
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Featured Image", name: "image", widget: "image" }
-      - { label: "Display Order", name: "order", widget: "number", default: 0 }
-
-  - name: "settings"
-    label: "Settings"
-    extension: "json"
-    format: "json-frontmatter"
-    files:
-      - file: "_contents/settings/general.json"
-        label: "General Settings"
-        name: "general"
-        fields:
-          - { label: "Site Title", name: "title", widget: "string" }
-          - { label: "Site Description", name: "description", widget: "text" }
-          - { label: "Logo", name: "logo", widget: "image" }
-          - { label: "Favicon", name: "favicon", widget: "image" }
-          - { label: "Footer Text", name: "footerText", widget: "text" }
-          - { label: "Social Media", name: "socialMedia", widget: "object", fields: [
-              { label: "Facebook", name: "facebook", widget: "string", required: false },
-              { label: "Twitter", name: "twitter", widget: "string", required: false },
-              { label: "Instagram", name: "instagram", widget: "string", required: false },
-              { label: "LinkedIn", name: "linkedin", widget: "string", required: false }
-            ] }
-  - name: "about"
-    label: "About"
-    extension: "json"
-    format: "json-frontmatter"
-    files:
-      - file: "_contents/about/general.json"
-        label: "General Settings"
-        name: "general"
-        fields:
-          - { label: "Site Title", name: "title", widget: "string" }
-          - { label: "Site Description", name: "description", widget: "text" }
